@@ -1,0 +1,15 @@
+{
+    "name": "tigron/skeleton-container",
+    "description": "Communication with remote containers",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tigron BVBA",
+            "email": "support@tigron.be"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Skeleton\\Container\\": "lib/Skeleton/Container/" }
+    }
+}
