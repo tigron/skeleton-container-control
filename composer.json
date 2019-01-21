@@ -1,5 +1,5 @@
 {
-    "name": "tigron/skeleton-container",
+    "name": "tigron/skeleton-container-control",
     "description": "Communication with remote containers",
     "type": "library",
     "license": "MIT",
