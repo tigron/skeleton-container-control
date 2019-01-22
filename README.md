@@ -1,4 +1,4 @@
-# skeleton-container
+# skeleton-container-control
 
 ## Description
 
@@ -9,7 +9,7 @@ needs to have the skeleton-remote package enabled
 
 Installation via composer:
 
-    composer require tigron/skeleton-container
+    composer require tigron/skeleton-container-control
 
 ## Howto
 
