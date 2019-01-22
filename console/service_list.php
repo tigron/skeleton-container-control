@@ -17,9 +17,9 @@ use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableCell;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Helper\TableStyle;
-use Skeleton\Container\Service;
+use Skeleton\Container\Control\Service;
 
-class Container_Service_List extends \Skeleton\Console\Command {
+class Container_Control_Service_List extends \Skeleton\Console\Command {
 
 	/**
 	 * Configure the Create command

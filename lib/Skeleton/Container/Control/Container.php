@@ -6,7 +6,7 @@
  * @author Gerry Demaret <gerry@tigron.be>
  */
 
-namespace Skeleton\Container;
+namespace Skeleton\Container\Control;
 use \Skeleton\Database\Database;
 
 class Container {

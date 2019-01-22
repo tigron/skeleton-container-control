@@ -1,4 +1,4 @@
-# skeleton-container-control
+# skeleton-container
 
 ## Description
 
@@ -15,7 +15,7 @@ Installation via composer:
 
 Initialize the service directory
 
-    \Skeleton\Container\Config::$service_dir = $some_very_cool_directory;
+    \Skeleton\Container\Control\Config::$service_dir = $some_very_cool_directory;
 
 The following skeleton console commands will be available:
 

@@ -7,7 +7,7 @@
  * @author Gerry Demaret <gerry@tigron.be>
  */
 
-namespace Skeleton\Container;
+namespace Skeleton\Container\Control;
 
 class Config {
 

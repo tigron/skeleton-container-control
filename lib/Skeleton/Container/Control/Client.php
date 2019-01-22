@@ -6,7 +6,7 @@
  * @author Gerry Demaret <gerry@tigron.be>
  * @author David Vandemaele <david@tigron.be>
  */
-namespace Skeleton\Container;
+namespace Skeleton\Container\Control;
 
 class Client extends \OtherCode\Rest\Rest {
 
@@ -111,7 +111,6 @@ class Client extends \OtherCode\Rest\Rest {
 	 * @param array $response
 	 */
 	private function check_error($response) {
-//		print_r($response);
 		if ($response->code != 200) {
 			$body = json_decode($response->body);
 			throw new \Exception('Error ' . $response->code . ': ' . $body->message);

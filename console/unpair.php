@@ -13,9 +13,9 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Skeleton\Container\Container;
+use Skeleton\Container\Control\Container;
 
-class Container_Unpair extends \Skeleton\Console\Command {
+class Container_Control_Unpair extends \Skeleton\Console\Command {
 
 	/**
 	 * Configure the Create command
