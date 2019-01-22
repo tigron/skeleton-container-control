@@ -3,7 +3,7 @@
  * Database migration class
  *
  */
-namespace Skeleton\Container;
+namespace Skeleton\Container\Control;
 
 
 use \Skeleton\Database\Database;
