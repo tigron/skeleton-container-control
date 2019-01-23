@@ -28,3 +28,48 @@ The following skeleton console commands will be available:
       container:unpair       Unpair from a container
     service
       service:list           List all known services
+
+To create a service, create a directory structure like this in your service
+directory:
+
+    service_name
+    ├── lib 	                # Libraries needed for this service
+    └── module                  # Contains the module for the service
+
+In the module directory, 1 file should be added: index.php. This module will
+handle all the incoming requests. It is a class that should extend from
+'Service_Module'
+
+This is an example of a very basic module:
+
+    <?php
+    /**
+     * Dummy module
+     *
+     * @author Christophe Gosiau <christophe@tigron.be>
+     * @author Gerry Demaret <gerry@tigron.be>
+     */
+
+    class Web_Module_Index extends Service_Module {
+
+        /**
+         * Handle call1
+         *
+         * @access public
+         * @param array $data
+         */
+        public function handle_call1($data) {
+        }
+    }
+
+After deployment, the remote server can respond to call1. To make a call, use
+this:
+
+    $container = \Skeleton\Container\Control\Container::get_by_name('my_remote_container');
+    $service = \Skeleton\Container\Control\Service::get_by_name('dummy');
+    $container_service = $container->get_container_service($service);
+    $data = [
+        'param1' => 'this is a test',
+        'param2' => 'This is another test'
+    ];
+    $container_service->call1($data);

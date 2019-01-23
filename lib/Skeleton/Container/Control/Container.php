@@ -29,6 +29,17 @@ class Container {
 	}
 
 	/**
+	 * Get container_service
+	 *
+	 * @access public
+	 * @param \Skeleton\Container\Control\Service $service
+	 * @return $container_service
+	 */
+	public function get_container_service(Service $service) {
+		return \Skeleton\Container\Control\Container\Service::get_by_container_service($this, $service);
+	}
+
+	/**
 	 * Provision
 	 *
 	 * @access public

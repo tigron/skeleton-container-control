@@ -24,10 +24,20 @@ class Client extends \OtherCode\Rest\Rest {
 	 * Set endpoint
 	 *
 	 * @access public
-	 * @param string $key
+	 * @param string $endpoint
 	 */
 	public function set_endpoint($endpoint) {
 		$this->configuration->url = $endpoint;
+	}
+
+	/**
+	 * Get endpoint
+	 *
+	 * @access public
+	 * @return string $endpoint
+	 */
+	public function get_endpoint() {
+		return $this->configuration->url;
 	}
 
 	/**
