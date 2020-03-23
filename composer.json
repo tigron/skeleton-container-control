@@ -10,13 +10,14 @@
         }
     ],
     "require": {
-		"tigron/skeleton-object": "^0.1.22",
-		"tigron/skeleton-database": "^0.1.6",
-		"tigron/skeleton-core": "^0.1.17",
-		"tigron/skeleton-migrate": "^0.1.9",
-        "othercode/rest": "^1.4"
+		"tigron/skeleton-object": ">=0.1.22",
+		"tigron/skeleton-database": ">=0.1.6",
+		"tigron/skeleton-core": ">=0.1.17",
+		"tigron/skeleton-migrate": ">=0.1.9",
+		"othercode/rest": "^1.4"
     },
     "autoload": {
         "psr-4": { "Skeleton\\Container\\": "lib/Skeleton/Container/" }
     }
 }
+
