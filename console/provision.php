@@ -56,6 +56,7 @@ class Container_Control_Provision extends \Skeleton\Console\Command {
 
 		$container->provision($service);
 		$output->writeln('Service ' . $service->name . ' provisioned successfully' );
+		return 0;
 	}
 
 }

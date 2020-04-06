@@ -105,16 +105,14 @@ class Container {
 			$exists = true;
 		} catch (\Exception $e) { }
 
-		if ($exists) {
-			$client->get('/container?action=unpair');
-		} else {
+		if (!$exists) {
 			$container = new self();
 			$container->endpoint = $endpoint;
 			$container->name = $info['name'];
 			$container->key = $key;
 			$container->save();
-			return $container;
 		}
+		return $container;
 	}
 
 	/**

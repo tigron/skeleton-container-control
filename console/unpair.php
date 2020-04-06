@@ -45,6 +45,7 @@ class Container_Control_Unpair extends \Skeleton\Console\Command {
 		}
 		$container->unpair();
 		$output->writeln('Unpaired with container: ' . $container->name );
+		return 0;
 	}
 
 }

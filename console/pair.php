@@ -39,6 +39,7 @@ class Container_Control_Pair extends \Skeleton\Console\Command {
 		$endpoint = $input->getArgument('endpoint');
 		$container = Container::pair($endpoint);
 		$output->writeln('Paired with new container: ' . $container->name );
+		return 0;
 	}
 
 }

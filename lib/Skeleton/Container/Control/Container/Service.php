@@ -58,7 +58,7 @@ class Service {
 	 */
 	public function __call($method, $arguments) {
 		$client = $this->container->get_client();
-		return $client->post( '/' . $this->service->name . '?action=' . $method, $arguments[0]);
+		return $client->post( '/' . $this->service->name . '?action=' . $method, $arguments);
 	}
 
 	/**

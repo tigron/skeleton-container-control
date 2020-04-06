@@ -56,6 +56,7 @@ class Container_Control_Deprovision extends \Skeleton\Console\Command {
 
 		$container->deprovision($service);
 		$output->writeln('Service ' . $service->name . ' deprovisioned successfully' );
+		return 0;
 	}
 
 }
