@@ -39,19 +39,6 @@ class Service {
 	}
 
 	/**
-	 * Get client
-	 *
-	 * @access public
-	 * @return Client $client
-	 */
-	public function get_client() {
-		$client = new Client();
-		$client->set_endpoint($this->endpoint);
-		$client->set_key($this->key);
-		return $client;
-	}
-
-	/**
 	 * Call a function
 	 *
 	 * @access public

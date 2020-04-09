@@ -67,7 +67,7 @@ class Client extends \OtherCode\Rest\Rest {
 	 * @param array $data
 	 */
 	public function post($url, $data = []) {
-		$response = parent::post($url, $data);
+		$response = parent::post($url, json_encode($data));
 		$this->check_error($response);
 
 		return $this->unpack($response->body);

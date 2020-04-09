@@ -47,7 +47,7 @@ class Container {
 	 */
 	public function provision(Service $service) {
 		$client = $this->get_client();
-		$client->post('/container?action=provision', [ 'name' => $service->name, 'content' => $service->get_deploy_content() ]);
+		$client->post('/container?action=provision', [ $service->name, $service->get_deploy_content() ]);
 	}
 
 	/**
@@ -58,7 +58,7 @@ class Container {
 	 */
 	public function deprovision(Service $service) {
 		$client = $this->get_client();
-		$client->post('/container?action=deprovision', [ 'name' => $service->name ]);
+		$client->post('/container?action=deprovision', [ $service->name ]);
 	}
 
 	/**
