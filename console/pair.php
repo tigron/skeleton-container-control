@@ -14,6 +14,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Skeleton\Container\Control\Container;
+use Skeleton\Container\Control\Util;
 
 class Container_Control_Pair extends \Skeleton\Console\Command {
 
@@ -38,7 +39,17 @@ class Container_Control_Pair extends \Skeleton\Console\Command {
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		$endpoint = $input->getArgument('endpoint');
 		$container = Container::pair($endpoint);
-		$output->writeln('Paired with new container: ' . $container->name );
+		$output->writeln('Paired with new container: ' . $container->name);
+
+		if ($container->ssl_certificate !== null) {
+			$info = Util::get_certificate_info($container->ssl_certificate);
+			$output->writeln('<comment>Using self-signed SSL certificate:</comment>');
+			$output->writeln('<comment> - subject: ' . $info['subject'] . '</comment>');
+			$output->writeln('<comment> - serial: ' . $info['serial_number'] . '</comment>');
+			$output->writeln('<comment> - valid from: ' . $info['valid_from'] . '</comment>');
+			$output->writeln('<comment> - valid to: ' . $info['valid_to'] . '</comment>');
+		}
+
 		return 0;
 	}
 

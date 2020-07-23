@@ -22,7 +22,7 @@ class Container {
 	 * @return Client $client
 	 */
 	public function get_client() {
-		$client = new Client($this->endpoint);
+		$client = new Client($this->endpoint, $this->ssl_hostname, $this->ssl_certificate);
 		$client->set_key($this->key);
 		return $client;
 	}
@@ -91,7 +91,7 @@ class Container {
 	 * @return Container $container
 	 */
 	public static function pair($endpoint) {
-		$client = new Client($endpoint);
+		$client = new Client($endpoint, null, null, false);
 		$key = $client->get('/container?action=pair');
 
 		$client->set_key($key);
@@ -108,6 +108,11 @@ class Container {
 			$container->endpoint = $endpoint;
 			$container->name = $info['name'];
 			$container->key = $key;
+
+			if (Util::is_self_signed($endpoint)) {
+				$container->load_array(Util::get_self_signed_info($endpoint));
+			}
+
 			$container->save();
 		}
 
