@@ -39,7 +39,7 @@ class Container_Control_Unpair extends \Skeleton\Console\Command {
 		$container_name = $input->getArgument('container');
 		try {
 			$container = Container::get_by_name($container_name);
-		} catch (\Exception $e) {
+		} catch (\Skeleton\Container\Control\Exception\Container $e) {
 			$output->writeln('<error>Container with name ' . $container_name . ' not found</error>');
 			return 1;
 		}
@@ -47,5 +47,4 @@ class Container_Control_Unpair extends \Skeleton\Console\Command {
 		$output->writeln('Unpaired with container: ' . $container->name );
 		return 0;
 	}
-
 }

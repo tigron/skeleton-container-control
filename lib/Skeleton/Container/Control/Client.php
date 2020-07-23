@@ -8,7 +8,23 @@
  */
 namespace Skeleton\Container\Control;
 
-class Client extends \OtherCode\Rest\Rest {
+class Client {
+	private $endpoint = null;
+	private $key = null;
+	private $client;
+
+	/**
+	 * Constructor
+	 *
+	 * @param string $endoint
+	 */
+	public function __construct(string $endpoint) {
+		$this->endpoint = $endpoint;
+		$this->client = new \GuzzleHttp\Client([
+			'base_uri' => $endpoint,
+			'http_errors' => false,
+		]);
+	}
 
 	/**
 	 * Set api key
@@ -16,18 +32,8 @@ class Client extends \OtherCode\Rest\Rest {
 	 * @access public
 	 * @param string $key
 	 */
-	public function set_key($key) {
-		$this->configuration->addHeader('key', $key);
-	}
-
-	/**
-	 * Set endpoint
-	 *
-	 * @access public
-	 * @param string $endpoint
-	 */
-	public function set_endpoint($endpoint) {
-		$this->configuration->url = $endpoint;
+	public function set_key(string $key) {
+		$this->key = $key;
 	}
 
 	/**
@@ -37,7 +43,7 @@ class Client extends \OtherCode\Rest\Rest {
 	 * @return string $endpoint
 	 */
 	public function get_endpoint() {
-		return $this->configuration->url;
+		return $this->endpoint;
 	}
 
 	/**
@@ -53,10 +59,13 @@ class Client extends \OtherCode\Rest\Rest {
 			$url .= '?' . $query;
 		}
 
-		$response = parent::get($url);
+		$response = $this->client->request('GET', $url, [
+			'headers' => $this->get_headers(),
+		]);
+
 		$this->check_error($response);
 
-		return $this->unpack($response->body);
+		return $this->unpack($response->getBody());
 	}
 
 	/**
@@ -67,51 +76,14 @@ class Client extends \OtherCode\Rest\Rest {
 	 * @param array $data
 	 */
 	public function post($url, $data = []) {
-		$response = parent::post($url, json_encode($data));
+		$response = $this->client->request('POST', $url, [
+			'headers' => $this->get_headers(),
+		    'body' => json_encode($data),
+		]);
+
 		$this->check_error($response);
 
-		return $this->unpack($response->body);
-	}
-
-	/**
-	 * Put
-	 *
-	 * @access public
-	 * @param string $url
-	 * @param array $data
-	 */
-	public function put($url, $data = []) {
-		$response = parent::put($url, $data);
-		$this->check_error($response);
-		return $this->unpack($response->body);
-	}
-
-	/**
-	 * Patch
-	 *
-	 * @access public
-	 * @param string $url
-	 * @param array $data
-	 */
-	public function patch($url, $data = []) {
-		$response = parent::patch($url, $data);
-		$this->check_error($response);
-
-		return $this->unpack($response->body);
-	}
-
-	/**
-	 * delete
-	 *
-	 * @access public
-	 * @param string $url
-	 * @param array $data
-	 */
-	public function delete($url, $data = []) {
-		$response = parent::delete($url, $data);
-		$this->check_error($response);
-
-		return $this->unpack($response->body);
+		return $this->unpack($response->getBody());
 	}
 
 	/**
@@ -121,9 +93,15 @@ class Client extends \OtherCode\Rest\Rest {
 	 * @param array $response
 	 */
 	private function check_error($response) {
-		if ($response->code != 200) {
-			$body = json_decode($response->body);
-			throw new \Exception('Error ' . $response->code . ': ' . $body->message);
+		if ($response->getStatusCode() != 200) {
+			$body = json_decode($response->getBody());
+			throw new Exception\Server('Error ' . $response->getStatusCode() . ': ' . $body->message);
+		} else {
+			$body = json_decode($response->getBody());
+
+			if ($body === null and !empty((string)$response->getBody())) {
+				throw new Exception\Response('Response could not be decoded: ' . $response->getBody());
+			}
 		}
 	}
 
@@ -136,10 +114,25 @@ class Client extends \OtherCode\Rest\Rest {
 	 */
 	private function unpack($response) {
 		$response = json_decode($response, true);
+
 		if (!isset($response['data'])) {
 			return [];
 		}
+
 		return $response['data'];
 	}
 
+	/**
+	 * Get headers for use by the HTTP client
+	 *
+	 * @access private
+	 * @return array $headers
+	 */
+	private function get_headers() : array {
+		if ($this->key !== null) {
+			return ['key' => $this->key];
+		} else {
+			return [];
+		}
+	}
 }

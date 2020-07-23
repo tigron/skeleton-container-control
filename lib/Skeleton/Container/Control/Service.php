@@ -97,8 +97,9 @@ class Service {
 	 */
 	public static function get_all() {
 		if (Config::$service_dir === null) {
-			throw new \Exception('No service_dir set. Please set Config::$service_dir');
+			throw new Exception\Service('No service_dir set. Please set Config::$service_dir');
 		}
+
 		$service_directories = scandir(Config::$service_dir);
 		$services = [];
 		foreach ($service_directories as $service_directory) {
@@ -114,6 +115,7 @@ class Service {
 			$service->name = $service_directory;
 			$services[] = $service;
 		}
+
 		return $services;
 	}
 
@@ -126,12 +128,13 @@ class Service {
 	 */
 	public static function get_by_name($name) {
 		$services = self::get_all();
+
 		foreach ($services as $service) {
 			if ($service->name == $name) {
 				return $service;
 			}
 		}
-		throw new \Exception('Service with name ' . $name . ' not found');
-	}
 
+		throw new Exception\Service('Service with name ' . $name . ' not found');
+	}
 }

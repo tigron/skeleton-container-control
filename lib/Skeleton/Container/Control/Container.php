@@ -22,8 +22,7 @@ class Container {
 	 * @return Client $client
 	 */
 	public function get_client() {
-		$client = new Client();
-		$client->set_endpoint($this->endpoint);
+		$client = new Client($this->endpoint);
 		$client->set_key($this->key);
 		return $client;
 	}
@@ -92,8 +91,7 @@ class Container {
 	 * @return Container $container
 	 */
 	public static function pair($endpoint) {
-		$client = new Client();
-		$client->set_endpoint($endpoint);
+		$client = new Client($endpoint);
 		$key = $client->get('/container?action=pair');
 
 		$client->set_key($key);
@@ -103,7 +101,7 @@ class Container {
 		try {
 			$container = self::get_by_name($info['name']);
 			$exists = true;
-		} catch (\Exception $e) { }
+		} catch (Exception\Container $e) { }
 
 		if (!$exists) {
 			$container = new self();
@@ -112,6 +110,7 @@ class Container {
 			$container->key = $key;
 			$container->save();
 		}
+
 		return $container;
 	}
 
@@ -125,11 +124,11 @@ class Container {
 	public static function get_by_name($name) {
 		$db = Database::get();
 		$id = $db->get_one('SELECT id FROM container WHERE name=?', [ $name ]);
+
 		if ($id === null) {
-			throw new \Exception('Container with name ' . $name . ' not found');
+			throw new Exception\Container('Container with name ' . $name . ' not found');
 		}
+
 		return self::get_by_id($id);
 	}
-
-
 }

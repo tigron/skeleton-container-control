@@ -42,14 +42,14 @@ class Container_Control_Provision extends \Skeleton\Console\Command {
 		$service_name = $input->getArgument('service');
 		try {
 			$container = Container::get_by_name($container_name);
-		} catch (\Exception $e) {
+		} catch (\Skeleton\Container\Control\Exception\Container $e) {
 			$output->writeln('<error>Container with name ' . $container_name . ' not found</error>');
 			return 1;
 		}
 
 		try {
 			$service = Service::get_by_name($service_name);
-		} catch (\Exception $e) {
+		} catch (\Skeleton\Container\Control\Exception\Service $e) {
 			$output->writeln('<error>Service with name ' . $service_name . ' not found</error>');
 			return 1;
 		}
@@ -58,5 +58,4 @@ class Container_Control_Provision extends \Skeleton\Console\Command {
 		$output->writeln('Service ' . $service->name . ' provisioned successfully' );
 		return 0;
 	}
-
 }

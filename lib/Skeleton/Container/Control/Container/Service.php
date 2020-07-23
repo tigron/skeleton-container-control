@@ -66,8 +66,7 @@ class Service {
 				return $container_service;
 			}
 		}
-		throw new \Exception('Service ' . $service->name . ' does not exist for container ' . $container->name);
+
+		throw new Exception\Service('Service ' . $service->name . ' does not exist for container ' . $container->name);
 	}
-
-
 }
