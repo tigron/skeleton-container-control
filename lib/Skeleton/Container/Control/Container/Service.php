@@ -27,6 +27,14 @@ class Service {
 	public $service = null;
 
 	/**
+	 * Environment
+	 *
+	 * @access public
+	 * @var string $environment
+	 */
+	private $environment = 'index';
+
+	/**
 	 * Constructor
 	 *
 	 * @access private
@@ -45,7 +53,21 @@ class Service {
 	 */
 	public function __call($method, $arguments) {
 		$client = $this->container->get_client();
-		return $client->post( '/' . $this->service->name . '?action=' . $method, $arguments);
+		return $client->post( '/' . $this->service->name . '/' . $this->environment . '?action=' . $method, $arguments);
+	}
+
+	/**
+	 * Set environment
+	 *
+	 * @access public
+	 * @param string $environment
+	 */
+	public function set_environment($environment = 'production') {
+		if ($environment == 'production') {
+			$this->environment = 'index';
+		} else {
+			$this->environment = 'debug';
+		}
 	}
 
 	/**

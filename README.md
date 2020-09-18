@@ -36,9 +36,9 @@ directory:
     ├── lib 	                # Libraries needed for this service
     └── module                  # Contains the module for the service
 
-In the module directory, 1 file should be added: index.php. This module will
-handle all the incoming requests. It is a class that should extend from
-'Service_Module'
+In the module directory, at least 1 file should be added: index.php.
+This module will handle all the incoming requests. It is a class that should
+extend from 'Service_Module'
 
 This is an example of a very basic module:
 
@@ -68,6 +68,25 @@ this:
     $container = \Skeleton\Container\Control\Container::get_by_name('my_remote_container');
     $service = \Skeleton\Container\Control\Service::get_by_name('dummy');
     $container_service = $container->get_container_service($service);
+    $data = [
+        'param1' => 'this is a test',
+        'param2' => 'This is another test'
+    ];
+    $container_service->call1($data);
+
+A service by default runs in 'production' mode. This means the calls will be
+handled by Web_Module_Index.
+For testing purpose, the environment can be modified to 'debug'. By doing so
+the calls will be handled by Web_Module_Debug. This is optional but strongly
+encouraged.
+When creating the service, make sure both production calls and debug calls
+are available.
+To enable debug mode, perform the following calls:
+
+    $container = \Skeleton\Container\Control\Container::get_by_name('my_remote_container');
+    $service = \Skeleton\Container\Control\Service::get_by_name('dummy');
+    $container_service = $container->get_container_service($service);
+    $container_service->set_environment('debug');
     $data = [
         'param1' => 'this is a test',
         'param2' => 'This is another test'

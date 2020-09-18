@@ -163,7 +163,11 @@ class Client {
 	private function check_error($response) {
 		if ($response->getStatusCode() != 200) {
 			$body = json_decode($response->getBody());
-			throw new Exception\Server('Error ' . $response->getStatusCode() . ': ' . $body->message);
+			if ($body === null) {
+				throw new Exception\Server('Error ' . $response->getStatusCode() . ': ' . $response->getBody());
+			} else {
+				throw new Exception\Server('Error ' . $response->getStatusCode() . ': ' . $body->message);
+			}
 		} else {
 			$body = json_decode($response->getBody());
 
