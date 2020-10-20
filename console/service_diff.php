@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Skeleton\Container\Control\Container;
 use Skeleton\Container\Control\Service;
 
-class Container_Control_Diff extends \Skeleton\Console\Command {
+class Container_Control_Service_Diff extends \Skeleton\Console\Command {
 
 	/**
 	 * Configure the Rename command
@@ -24,7 +24,7 @@ class Container_Control_Diff extends \Skeleton\Console\Command {
 	 * @access protected
 	 */
 	protected function configure() {
-		$this->setName('container:diff');
+		$this->setName('service:diff');
 		$this->setDescription('Show differences between the local and remote service, if any');
 		$this->addArgument('container', InputArgument::REQUIRED, 'The name of the container');
 		$this->addArgument('service', InputArgument::REQUIRED, 'The name of the service');
