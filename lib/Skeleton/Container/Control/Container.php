@@ -72,6 +72,18 @@ class Container {
 	}
 
 	/**
+	 * Diff
+	 *
+	 * @access public
+	 * @param Service $service
+	 */
+	public function diff(Service $service) {
+		$client = $this->get_client();
+		$diff = $client->post('/container?action=diff', [ $service->name, $service->get_deploy_content() ]);
+		return $diff;
+	}
+
+	/**
 	 * Unpair
 	 *
 	 * @access public
