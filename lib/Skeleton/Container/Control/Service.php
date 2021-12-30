@@ -49,16 +49,14 @@ class Service {
 	 * @return array $content
 	 */
 	public function get_deploy_content() {
-		$config = \Skeleton\Core\Config::Get();
-
 		$files = $this->glob_recursive($this->path . '/*');
 		foreach ($files as $key => $file) {
 			$files[$key] = str_replace($this->path, '', $file);
 		}
 
 		$zip = new \ZipArchive();
-
-		$zip->open($config->tmp_dir .'/package.zip', \ZipArchive::CREATE);
+		$filename = sys_get_temp_dir() . '/package.zip';
+		$zip->open($filename, \ZipArchive::CREATE);
 
 		foreach ($files as $file) {
 			if (is_dir($this->path . '/' . $file)) {
@@ -69,8 +67,8 @@ class Service {
 		}
 		$zip->close();
 
-		$content = base64_encode(file_get_contents($config->tmp_dir .'/package.zip'));
-		unlink($config->tmp_dir .'/package.zip');
+		$content = base64_encode(file_get_contents($filename));
+		unlink($filename);
 		return $content;
 	}
 
