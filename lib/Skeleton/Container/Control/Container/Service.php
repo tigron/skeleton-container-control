@@ -89,6 +89,6 @@ class Service {
 			}
 		}
 
-		throw new Exception\Service('Service ' . $service->name . ' does not exist for container ' . $container->name);
+		throw new \Skeleton\Container\Control\Exception\Service('Service ' . $service->name . ' does not exist for container ' . $container->name);
 	}
 }
