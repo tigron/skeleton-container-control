@@ -13,7 +13,6 @@
 		"guzzlehttp/guzzle": "~7",
 		"tigron/skeleton-object": ">=0.1.22",
 		"tigron/skeleton-database": ">=0.1.6",
-		"tigron/skeleton-core": ">=2",
 		"tigron/skeleton-migrate": ">=0.1.9"
     },
     "autoload": {
