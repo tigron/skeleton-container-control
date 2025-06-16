@@ -38,7 +38,7 @@ class Container_Control_List extends \Skeleton\Console\Command {
 	 * @param InputInterface $input
 	 * @param OutputInterface $output
 	 */
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$containers = Container::get_all();
 
 		$table = new Table($output);

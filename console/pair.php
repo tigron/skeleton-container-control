@@ -36,7 +36,7 @@ class Container_Control_Pair extends \Skeleton\Console\Command {
 	 * @param InputInterface $input
 	 * @param OutputInterface $output
 	 */
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$endpoint = $input->getArgument('endpoint');
 		$container = Container::pair($endpoint);
 		$output->writeln('Paired with new container: ' . $container->name);

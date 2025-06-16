@@ -39,7 +39,7 @@ class Container_Control_Info extends \Skeleton\Console\Command {
 	 * @param InputInterface $input
 	 * @param OutputInterface $output
 	 */
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$container_name = $input->getArgument('container');
 		try {
 			$container = Container::get_by_name($container_name);

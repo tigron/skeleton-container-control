@@ -37,7 +37,7 @@ class Container_Control_Service_Diff extends \Skeleton\Console\Command {
 	 * @param InputInterface $input
 	 * @param OutputInterface $output
 	 */
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$container_name = $input->getArgument('container');
 		$service_name = $input->getArgument('service');
 

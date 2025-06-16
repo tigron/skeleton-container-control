@@ -36,7 +36,7 @@ class Container_Control_Rename extends \Skeleton\Console\Command {
 	 * @param InputInterface $input
 	 * @param OutputInterface $output
 	 */
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$current_name = $input->getArgument('current_name');
 		$new_name = $input->getArgument('new_name');
 

@@ -38,7 +38,7 @@ class Container_Control_Service_List extends \Skeleton\Console\Command {
 	 * @param InputInterface $input
 	 * @param OutputInterface $output
 	 */
-	protected function execute(InputInterface $input, OutputInterface $output) {
+	protected function execute(InputInterface $input, OutputInterface $output): int {
 		$services = Service::get_all();
 
 		$table = new Table($output);
